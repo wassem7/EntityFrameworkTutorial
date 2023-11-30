@@ -3,6 +3,7 @@ using Entity_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityDataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231130043411_ReAddGenreTable")]
+    partial class ReAddGenreTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,22 +45,6 @@ namespace EntityDataAccess.Migrations
                     b.HasKey("bookId");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            bookId = 1,
-                            ISBN = "312",
-                            Price = 312.21m,
-                            Title = "Kingdom Power"
-                        },
-                        new
-                        {
-                            bookId = 2,
-                            ISBN = "697",
-                            Price = 642.21m,
-                            Title = "Prayer & Fasting"
-                        });
                 });
 
             modelBuilder.Entity("Entity_Models.Models.Genre", b =>
