@@ -19,7 +19,7 @@ namespace Entity_DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>().Property(u => u.Price).HasPrecision(10, 5);
-            var BookList = new Book[]
+            var bookList = new Book[]
             {
                 new Book()
                 {
@@ -36,7 +36,9 @@ namespace Entity_DataAccess.Data
                     Price = 642.21M
                 },
             };
-            modelBuilder.Entity<Book>().HasData(BookList);
+            modelBuilder.Entity<Book>().HasData(bookList);
         }
+        
+        
     }
 }
