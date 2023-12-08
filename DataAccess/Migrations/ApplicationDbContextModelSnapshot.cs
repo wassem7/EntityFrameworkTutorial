@@ -72,12 +72,11 @@ namespace EntityDataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("GenreName")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("genre");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GenreId");
 
-                    b.ToTable("tb_genre");
+                    b.ToTable("Genre");
                 });
 #pragma warning restore 612, 618
         }
