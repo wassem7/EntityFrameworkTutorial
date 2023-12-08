@@ -21,6 +21,37 @@ namespace EntityDataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AuthorBook", b =>
+                {
+                    b.Property<int>("AuthorsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BooksbookId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuthorsId", "BooksbookId");
+
+                    b.HasIndex("BooksbookId");
+
+                    b.ToTable("AuthorBook");
+                });
+
+            modelBuilder.Entity("Entity_Models.Models.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("Entity_Models.Models.Book", b =>
                 {
                     b.Property<int>("bookId")
@@ -150,6 +181,21 @@ namespace EntityDataAccess.Migrations
                             Location = "Dubai",
                             Name = "Seemzy Publication"
                         });
+                });
+
+            modelBuilder.Entity("AuthorBook", b =>
+                {
+                    b.HasOne("Entity_Models.Models.Author", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity_Models.Models.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksbookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entity_Models.Models.Book", b =>

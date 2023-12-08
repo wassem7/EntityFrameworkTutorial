@@ -13,6 +13,8 @@ namespace Entity_DataAccess.Data
 
         public DbSet<Publisher> Publishers { get; set; }
 
+        public DbSet<Author> Authors { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(
