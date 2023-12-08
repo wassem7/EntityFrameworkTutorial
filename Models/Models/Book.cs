@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity_Models.Models
 {
@@ -12,5 +13,7 @@ namespace Entity_Models.Models
         public string ISBN { get; set; }
 
         public decimal Price { get; set; }
+        
+        public BookDetail BookDetail { get; set; }
     }
 }

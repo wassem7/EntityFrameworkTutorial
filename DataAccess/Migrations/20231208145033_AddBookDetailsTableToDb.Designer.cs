@@ -3,6 +3,7 @@ using Entity_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityDataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231208145033_AddBookDetailsTableToDb")]
+    partial class AddBookDetailsTableToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,9 +71,6 @@ namespace EntityDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookDetailId"));
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Details")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -79,9 +79,6 @@ namespace EntityDataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BookDetailId");
-
-                    b.HasIndex("BookId")
-                        .IsUnique();
 
                     b.ToTable("BookDetails");
                 });
@@ -104,22 +101,6 @@ namespace EntityDataAccess.Migrations
                     b.HasKey("GenreId");
 
                     b.ToTable("Genre");
-                });
-
-            modelBuilder.Entity("Entity_Models.Models.BookDetail", b =>
-                {
-                    b.HasOne("Entity_Models.Models.Book", "Book")
-                        .WithOne("BookDetail")
-                        .HasForeignKey("Entity_Models.Models.BookDetail", "BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("Entity_Models.Models.Book", b =>
-                {
-                    b.Navigation("BookDetail");
                 });
 #pragma warning restore 612, 618
         }

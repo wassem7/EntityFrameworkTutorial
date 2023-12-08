@@ -8,6 +8,8 @@ namespace Entity_DataAccess.Data
         public DbSet<Book> Books { get; set; }
 
         public DbSet<Genre> Genre { get; set; }
+        
+        public DbSet<BookDetail> BookDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
