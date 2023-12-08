@@ -3,6 +3,7 @@ using Entity_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityDataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231208180033_AddLocationFieldToPublisherDb")]
+    partial class AddLocationFieldToPublisherDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,15 +39,10 @@ namespace EntityDataAccess.Migrations
                         .HasPrecision(10, 5)
                         .HasColumnType("decimal(10,5)");
 
-                    b.Property<int>("PublisherId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("bookId");
-
-                    b.HasIndex("PublisherId");
 
                     b.ToTable("Books");
 
@@ -54,7 +52,6 @@ namespace EntityDataAccess.Migrations
                             bookId = 1,
                             ISBN = "312",
                             Price = 312.21m,
-                            PublisherId = 1,
                             Title = "Kingdom Power"
                         },
                         new
@@ -62,7 +59,6 @@ namespace EntityDataAccess.Migrations
                             bookId = 2,
                             ISBN = "697",
                             Price = 642.21m,
-                            PublisherId = 3,
                             Title = "Prayer & Fasting"
                         });
                 });
@@ -130,37 +126,6 @@ namespace EntityDataAccess.Migrations
                     b.HasKey("PublisherId");
 
                     b.ToTable("Publishers");
-
-                    b.HasData(
-                        new
-                        {
-                            PublisherId = 1,
-                            Location = "North America",
-                            Name = "Cengage"
-                        },
-                        new
-                        {
-                            PublisherId = 2,
-                            Location = "Canada",
-                            Name = "Darkwa Publication"
-                        },
-                        new
-                        {
-                            PublisherId = 3,
-                            Location = "Dubai",
-                            Name = "Seemzy Publication"
-                        });
-                });
-
-            modelBuilder.Entity("Entity_Models.Models.Book", b =>
-                {
-                    b.HasOne("Entity_Models.Models.Publisher", "Publisher")
-                        .WithMany()
-                        .HasForeignKey("PublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Publisher");
                 });
 
             modelBuilder.Entity("Entity_Models.Models.BookDetail", b =>

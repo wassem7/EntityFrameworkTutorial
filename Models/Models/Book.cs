@@ -13,7 +13,11 @@ namespace Entity_Models.Models
         public string ISBN { get; set; }
 
         public decimal Price { get; set; }
-        
+
         public BookDetail BookDetail { get; set; }
+
+        [ForeignKey("Publisher")]
+        public int PublisherId { get; set; }
+        public Publisher Publisher { get; set; }
     }
 }
